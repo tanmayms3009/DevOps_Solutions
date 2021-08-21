@@ -6,6 +6,8 @@ C) Your local changes to the following files would be overwritten by merge:
 
 Solutions:
 
+I) If we start from beginning i.e. when local changes are yet to be made:
+
  1. Create 2 branches locally, e.g. master, dev
  2. Switch to dev branch: git checkout dev
  3. Make the correction to the file in dev branch
@@ -16,3 +18,13 @@ Solutions:
  8. Solve the merge conflict in file and then add & commit changes: git add git / commit
  9. Now merger the changes from dev branch to master by staying in master branch itself: git merge dev
  10. If we want to merge changes of dev to master > switch to master > git merge dev
+ 
+II) If we start when we already have changes made locally:
+
+ 1. Add and commit changes to branch, lets say we are in "master" branch: git add / git commit
+ 2. Switch to dev branch: git checkout dev
+ 3. Pull the code from remote branch (In case of any changes made by others on remote repo): git pull origin master / -"- --allow-unrelated-histories
+ 4. See the changes, if merged to local file in dev branch.
+ 5. Solve the merge conflict in file and then add & commit changes: git add git / commit
+ 6. Now checkout to master branch: git checkout master
+ 7. Merge dev to master: git merge dev
