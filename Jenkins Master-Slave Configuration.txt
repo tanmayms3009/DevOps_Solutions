@@ -1,0 +1,53 @@
+JENKINS MASTER SLAVE CONFIGURATION FOR UBUNTU:
+
+
+A) Master configuration :
+
+    1. Install Java Openjdk & Openjre: https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-18-04
+    2. Install Jenkins: https://www.digitalocean.com/community/tutorials/how-to-install-jenkins-on-ubuntu-18-04
+    3. Go to OS Cli
+    4. Set password for jenkins user: passwd jenkins
+    5. Switch to jenkins user: su jenkins
+    6. Go to home directory of jenkins: cd /var/lib/jenkins
+    7. Generate ssh keys for jenkins user: ssh-keygen
+
+
+
+B) Slave Configuration:
+
+    1. Install Java Openjdk & Openjre: https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-18-04
+    2. Create user jenkins: useradd -d /home/jenkins -s /bin/bash -m jenkins
+    3. Set password for jenkins user: passwd jenkins
+    4. Switch to jenkins user: su jenkins
+    5. Go to home directory: cd ~
+    6. Generate ssh keys for jenkins user: ssh-keygen
+    7. Add public key to authorized keys: cat id_rsa.pub >> authorized_keys
+
+
+C) Master Server Key-exchange:
+
+    1. Go to OS Cli
+    2. Switch to jenkins user: su jenkins
+    3. Go to home directory of jenkins: cd /var/lib/jenkins
+    4. ssh-keyscan -H [Hostname (Website URL)/Public IP/Private IP (IF in same VPC) of Slave node] >> known_hosts
+    5. chown jenkins:jenkins known_hosts
+    6. chmod 700 known_hosts
+
+D) Slave Server Configuration:
+
+    1. Add id_rsa.pub of Master server to authorized_keys of slave server user's ./.ssh/authorized_keys file
+
+E) Jenkins dashboards configurations:
+
+    1. Go to Manage Jenkins
+    2. Manage nodes
+    3. New node
+    4. Add details: Name, Label, Executors, Home directory (/home/jenkins as we created jenkins user on slave node with this path as home directory) etc.
+    5. Hostname: Add Hostname if [Hostname(Website URL)/Public IP/Private IP (IF in same VPC) of Slave node]
+    6. Use Hostname as provided while ssh-keyscan in "C) 4."
+    7. Add Jenkins Credentials
+    8. Username with ssh
+    9. Add user name as 'jenkins' since we created this user on slave
+    10. Add private key of slave manually from Slave node > jenkins user > home directory > /home/jenkins/.ssh/id_rsa
+    11. Add jenkins user password of Slave node.
+    12. Launch node.
