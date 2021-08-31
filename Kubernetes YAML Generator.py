@@ -99,7 +99,7 @@ def containers():
     file.write(k*"   " + "     - image: " + str(c_image) + "\n" +
                k*"   " + "       name: " + str(c_name) + "\n" +
                k*"   " + "       ports: \n" +
-               k*"   " + "          containerPort: " + str(c_port) + "\n" +
+               k*"   " + "        - containerPort: " + str(c_port) + "\n" +
                k*"   " + "          protocol: " + str(c_prot) + "\n")
     if c_h_perm == "e":
         c_h_port = int(input("Enter host port number: "))
@@ -460,11 +460,11 @@ def service():
             file.write("      " + str(ssnk) + ": " + str(ssnv) + "\n")
         service_port_no=input("Enter service port number: ")
         service_target_port_no=input("Enter Target port number for pod container: ")
-        service_proto_type=input("Enter Service Protocol Type: ")
+        service_proto_type=input("Enter Service Protocol Type: ").upper()
         file.write(k*"   " + "   ports: \n" + 
-                   k*"   " + "     port: " + str(service_port_no) + "\n" +
-                   k*"   " + "     targetPort: " + str(service_target_port_no) + "\n" +
-                   k*"   " + "     protocol: " + str(service_proto_type) + "\n")
+                   k*"   " + "    - port: " + str(service_port_no) + "\n" +
+                   k*"   " + "      targetPort: " + str(service_target_port_no) + "\n" +
+                   k*"   " + "      protocol: " + str(service_proto_type) + "\n")
     elif service_type == "np":
         file.write(k*"   " + "   type: NodePort \n" +
                    k*"   " + "   selector: \n")
@@ -476,12 +476,12 @@ def service():
         service_port_no=int(input("Enter Service port number: "))
         service_target_port_no=int(input("Enter Target port number for Container in Pod: "))
         service_node_port_no=int(input("Enter Node port number: "))
-        service_proto_type=input("Enter Service Protocol Type: ")
+        service_proto_type=input("Enter Service Protocol Type: ").upper()
         file.write(k*"   " + "   ports: \n" + 
-                   k*"   " + "     port: " + str(service_port_no) + "\n" +
-                   k*"   " + "     targetPort: " + str(service_target_port_no) + "\n" + 
-                   k*"   " + "     nodePort: " + str(service_node_port_no) + "\n" + 
-                   k*"   " + "     protocol: " + str(service_proto_type) + "\n")
+                   k*"   " + "    - port: " + str(service_port_no) + "\n" +
+                   k*"   " + "      targetPort: " + str(service_target_port_no) + "\n" + 
+                   k*"   " + "      nodePort: " + str(service_node_port_no) + "\n" + 
+                   k*"   " + "      protocol: " + str(service_proto_type) + "\n")
     elif service_type == "lb":
         file.write(k*"  " + "   type: LoadBalancer \n" +
                    k*"  " + "   selector: \n")
@@ -493,12 +493,12 @@ def service():
         service_port_no=int(input("Enter Service port number: "))
         service_target_port_no=int(input("Enter Target port number for Container in Pod: "))
         service_node_port_no=int(input("Enter Node port number: "))
-        service_proto_type=input("Enter Service Protocol Type: ")
+        service_proto_type=input("Enter Service Protocol Type: ").upper()
         file.write(k*"   " + "   ports: \n" + 
-                   k*"   " + "     port: " + str(service_port_no) + "\n" +
-                   k*"   " + "     targetPort: " + str(service_target_port_no) + "\n" + 
-                   k*"   " + "     nodePort: " + str(service_node_port_no) + "\n" + 
-                   k*"   " + "     protocol: " + str(service_proto_type) + "\n")
+                   k*"   " + "    - port: " + str(service_port_no) + "\n" +
+                   k*"   " + "      targetPort: " + str(service_target_port_no) + "\n" + 
+                   k*"   " + "      nodePort: " + str(service_node_port_no) + "\n" + 
+                   k*"   " + "      protocol: " + str(service_proto_type) + "\n")
     elif service_type == "i":
         i_type = input("Enter which method is to be adopted to expose backend (D: Direct, P: Path Based, H: Host Based)").lower()
         if i_type == "d":
@@ -910,8 +910,6 @@ elif comp == "resourcequota" or comp == "resource quota":
     spec()
     k=0
     resourcequota()
-
-
 
 
 
