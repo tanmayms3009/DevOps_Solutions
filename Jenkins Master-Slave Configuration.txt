@@ -1,6 +1,5 @@
 JENKINS MASTER SLAVE CONFIGURATION FOR UBUNTU:
 
-
 A) Master configuration :
 
     1. Install Java Openjdk & Openjre: https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-18-04
@@ -11,8 +10,6 @@ A) Master configuration :
     6. Go to home directory of jenkins: cd /var/lib/jenkins
     7. Generate ssh keys for jenkins user: ssh-keygen
 
-
-
 B) Slave Configuration:
 
     1. Install Java Openjdk & Openjre: https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-18-04
@@ -22,7 +19,6 @@ B) Slave Configuration:
     5. Go to home directory: cd ~
     6. Generate ssh keys for jenkins user: ssh-keygen
     7. Add public key to authorized keys: cat id_rsa.pub >> authorized_keys
-
 
 C) Master Server Key-exchange:
 
